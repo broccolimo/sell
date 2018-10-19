@@ -1,0 +1,18 @@
+#server:
+#  port: 8080
+#  servlet:
+#    context-path: /sell
+#logging:
+#  pattern:
+#    ##控制台里日志格式的配置
+#    console: "%d - jy - %msg%n"
+#  ##不要写成"/log"
+#  #path: log
+#  ##file和path作用都是生成日志文件，file可以设置日志的名字，file优先级比path高，通常file和path中只配置一个就行
+#  file: log/sell.log
+#  level:
+#    com.mo.CCCCTest: trace
+
+spring:
+  profiles:
+    active: dev
