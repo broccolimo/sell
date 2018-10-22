@@ -1,6 +1,7 @@
 package com.mo.VO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
@@ -9,7 +10,8 @@ import java.math.BigDecimal;
  * @author 音神
  * @date 2018/10/20 22:43
  */
-
+@Setter
+//fields的声明顺序决定前端收到json中的排列顺序
 public class ProductInfoVO {
 
     @JsonProperty("id")
@@ -26,4 +28,6 @@ public class ProductInfoVO {
 
     @JsonProperty("icon")
     private String productIcon;
+
+
 }

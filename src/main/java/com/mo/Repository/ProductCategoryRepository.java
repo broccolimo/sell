@@ -15,5 +15,6 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
     ProductCategory findByCategoryName(String categoryName);
 
     //给定类目编号的List，获取相应的对象
+    //这个会对列表中重复的值进行过滤 即2个相同的值只会得到同一条记录
     List<ProductCategory> findByCategoryTypeIn(List<Integer> ProductCategoryTypeList);
 }

@@ -276,3 +276,49 @@
 2018-10-20 22:47:28,377 - Initializing Spring FrameworkServlet 'dispatcherServlet'
 2018-10-20 22:47:28,378 - FrameworkServlet 'dispatcherServlet': initialization started
 2018-10-20 22:47:28,395 - FrameworkServlet 'dispatcherServlet': initialization completed in 17 ms
+2018-10-20 22:49:09,997 - Starting SellApplication on DESKTOP-5JAVIGT with PID 11564 (D:\Idea_workplace\sell\target\classes started by broccoli in D:\Idea_workplace\sell)
+2018-10-20 22:49:10,001 - The following profiles are active: dev
+2018-10-20 22:49:10,096 - Refreshing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1fa121e2: startup date [Sat Oct 20 22:49:10 CST 2018]; root of context hierarchy
+2018-10-20 22:49:11,564 - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$59017baf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-10-20 22:49:11,986 - Tomcat initialized with port(s): 8080 (http)
+2018-10-20 22:49:12,001 - Initializing ProtocolHandler ["http-nio-8080"]
+2018-10-20 22:49:12,013 - Starting service [Tomcat]
+2018-10-20 22:49:12,013 - Starting Servlet Engine: Apache Tomcat/8.5.34
+2018-10-20 22:49:12,017 - The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_144\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\ProgramData\Oracle\Java\javapath;C:;C:\Program Files\Java\jdk1.8.0_144\bin;C:\Program Files\Java\jdk1.8.0_144\jre\bin;\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;E:\MySQL\MySQL Server 5.1\bin;D:\Maven\apache-maven-3.5.2\bin;E:\SoftWare\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;E:\NodeJS\;C:\WINDOWS\System32\OpenSSH\;E:\p\Scripts\;E:\p\;C:\Users\broccoli\AppData\Local\Microsoft\WindowsApps;C:\Users\broccoli\AppData\Roaming\npm;E:\Fiddler;C:\Users\broccoli\AppData\Local\Microsoft\WindowsApps;;.]
+2018-10-20 22:49:12,154 - Initializing Spring embedded WebApplicationContext
+2018-10-20 22:49:12,155 - Root WebApplicationContext: initialization completed in 2059 ms
+2018-10-20 22:49:12,273 - Servlet dispatcherServlet mapped to [/]
+2018-10-20 22:49:12,277 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-10-20 22:49:12,278 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-10-20 22:49:12,278 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-10-20 22:49:12,278 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-10-20 22:49:12,402 - HikariPool-1 - Starting...
+2018-10-20 22:49:12,879 - HikariPool-1 - Start completed.
+2018-10-20 22:49:12,912 - Building JPA container EntityManagerFactory for persistence unit 'default'
+2018-10-20 22:49:13,017 - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2018-10-20 22:49:13,097 - HHH000412: Hibernate Core {5.2.17.Final}
+2018-10-20 22:49:13,098 - HHH000206: hibernate.properties not found
+2018-10-20 22:49:13,143 - HCANN000001: Hibernate Commons Annotations {5.0.1.Final}
+2018-10-20 22:49:13,415 - HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2018-10-20 22:49:14,274 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2018-10-20 22:49:14,757 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-10-20 22:49:15,067 - Looking for @ControllerAdvice: org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@1fa121e2: startup date [Sat Oct 20 22:49:10 CST 2018]; root of context hierarchy
+2018-10-20 22:49:15,100 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2018-10-20 22:49:15,131 - Mapped "{[/buyer/product/list],methods=[GET]}" onto public com.mo.VO.ResultVO com.mo.Controller.BuyerProductController.list()
+2018-10-20 22:49:15,136 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-10-20 22:49:15,137 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-10-20 22:49:15,164 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-10-20 22:49:15,165 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-10-20 22:49:15,261 - Adding welcome page template: index
+2018-10-20 22:49:15,501 - Registering beans for JMX exposure on startup
+2018-10-20 22:49:15,503 - Bean with name 'dataSource' has been autodetected for JMX exposure
+2018-10-20 22:49:15,509 - Located MBean 'dataSource': registering with JMX server as MBean [com.zaxxer.hikari:name=dataSource,type=HikariDataSource]
+2018-10-20 22:49:15,536 - Starting ProtocolHandler ["http-nio-8080"]
+2018-10-20 22:49:15,550 - Using a shared selector for servlet write/read
+2018-10-20 22:49:15,577 - Tomcat started on port(s): 8080 (http) with context path '/sell'
+2018-10-20 22:49:15,581 - Started SellApplication in 6.283 seconds (JVM running for 7.709)
+2018-10-20 22:49:15,924 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-10-20 22:49:15,925 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-10-20 22:49:15,946 - FrameworkServlet 'dispatcherServlet': initialization completed in 21 ms

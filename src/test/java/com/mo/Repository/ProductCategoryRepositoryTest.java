@@ -1,16 +1,12 @@
 package com.mo.Repository;
 
-import com.mo.Entity.ProductCategory;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author 音神
@@ -53,16 +49,16 @@ public class ProductCategoryRepositoryTest {
         /*ProductCategory old = productCategoryRepository.findByCategoryName("男生最爱");
         old.setCategoryType(68);
         productCategoryRepository.save(old);*/
-        ProductCategory productCategory = new ProductCategory("女生最爱", 234);
+        /*ProductCategory productCategory = new ProductCategory("女生最爱", 234);
         ProductCategory res = productCategoryRepository.save(productCategory);
-        Assert.assertNotNull(res);
+        Assert.assertNotNull(res);*/
     }
 
 
     @Test
     public void findByCategoryTypeInTest(){
-        List<Integer> list = Arrays.asList(2, 3, 4);
+        /*List<Integer> list = Arrays.asList(2, 3, 4, 3, 2, 3, 4, 5, 10);
         List<ProductCategory> res = productCategoryRepository.findByCategoryTypeIn(list);
-        Assert.assertNotEquals(0, res.size());
+        Assert.assertEquals(2, res.size());*/
     }
 }
