@@ -1,6 +1,7 @@
 package com.mo.Entity;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -14,7 +15,8 @@ import java.util.Date;
 @Table(name = "product_category")
 @Entity
 //这个不加的话 更新时update_time不会发生变化
-//@DynamicUpdate
+@DynamicUpdate
+@DynamicInsert
 //lombok 代替getter/setter/toString方法
 @Data
 public class ProductCategory {
@@ -36,4 +38,8 @@ public class ProductCategory {
         this.categoryName = categoryName;
         this.categoryType = categoryType;
     }
+
+    private Date createTime;
+
+    private Date updateTime;
 }

@@ -5,6 +5,8 @@ import lombok.Getter;
 /**
  * @author 音神
  * @date 2018/10/22 23:37
+ *
+ * 订单总表状态Enum
  */
 @Getter
 public enum OrderStatusEnum {

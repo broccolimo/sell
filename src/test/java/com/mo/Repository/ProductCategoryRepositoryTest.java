@@ -1,6 +1,7 @@
 package com.mo.Repository;
 
-import lombok.extern.slf4j.Slf4j;
+import com.mo.Entity.ProductCategory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@Slf4j
 public class ProductCategoryRepositoryTest {
 
     @Autowired
@@ -23,10 +23,9 @@ public class ProductCategoryRepositoryTest {
 
     @Test
     public void saveTest(){
-        /*ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryName("女生最爱");
-        productCategory.setCategoryType(3);
-        productCategoryRepository.save(productCategory);*/
+        ProductCategory productCategory = new ProductCategory("火热", 3);
+        ProductCategory res = productCategoryRepository.save(productCategory);
+        Assert.assertNotNull(res);
     }
 
     @Test

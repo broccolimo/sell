@@ -6,6 +6,8 @@ import lombok.Getter;
  * 商品状态 0正常 1下架
  * @author 音神
  * @date 2018/10/19 17:43
+ *
+ * 商品状态Enum
  */
 @Getter
 public enum ProductStatusEnum {

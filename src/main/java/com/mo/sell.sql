@@ -31,10 +31,10 @@ create table order_master (
 	buyer_address varchar(128) not null comment '买家地址',
 	buyer_openid varchar(64) not null comment '买家微信号',
 	order_amount decimal(8,2) not null comment '订单总额',
-	order_status tinyint(3) not null defalut '0' comment '订单状态, 默认0新下单',
-	pay_status tinyint(3) not null defalut '0' comment '支付状态, 默认0未支付',
-	create_time timestamp not null defalut current_timestamp comment '创建时间',
-	update_time timestamp not null defalut current_timestamp on update current_timestamp
+	order_status tinyint(3) not null default '0' comment '订单状态, 默认0新下单',
+	pay_status tinyint(3) not null default '0' comment '支付状态, 默认0未支付',
+	create_time timestamp not null default current_timestamp comment '创建时间',
+	update_time timestamp not null default current_timestamp on update current_timestamp
 		comment '更新时间',
 	primary key(order_id),
 	key idx_buyer_openid (buyer_openid)
@@ -48,8 +48,8 @@ create table order_detail (
 	product_price decimal(8,2) not null comment '商品价格',
 	product_icon varchar(512) comment '商品图标链接地址',
 	product_quantity int not null comment '商品数量',
-	create_time timestamp not null defalut current_timestamp comment '创建时间',
-	update_time timestamp not null defalut current_timestamp on update current_timestamp
+	create_time timestamp not null default current_timestamp comment '创建时间',
+	update_time timestamp not null default current_timestamp on update current_timestamp
 		comment '更新时间',
 	primary key (detail_id),
 	key idx_order_id (order_id)

@@ -2,22 +2,28 @@ package com.mo.Entity;
 
 import com.mo.Enum.OrderStatusEnum;
 import com.mo.Enum.PayStatusEnum;
+import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * @author 音神
  * @date 2018/10/22 23:33
+ *
+ * 订单总表
  */
 @Entity
 @Table(name = "order_master")
 @DynamicUpdate
+//这个不加 在save的时候会报错:can not set create_time null
+@DynamicInsert
+@Data
 public class OrderMaster {
 
+    @Id
     private String orderId;
 
     //买家名字

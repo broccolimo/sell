@@ -5,7 +5,8 @@ import lombok.Getter;
 /**
  * @author 音神
  * @date 2018/10/22 23:42
- */
+ *
+ * 订单总表支付状态Enum */
 @Getter
 public enum PayStatusEnum {
     WAIT(0, "等待支付"),
