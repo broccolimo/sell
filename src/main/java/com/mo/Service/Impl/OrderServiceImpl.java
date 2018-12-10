@@ -1,5 +1,6 @@
 package com.mo.Service.Impl;
 
+import com.mo.Converter.OrderMaster2OrderDTOConverter;
 import com.mo.DTO.CartDTO;
 import com.mo.DTO.OrderDTO;
 import com.mo.Entity.OrderDetail;
@@ -15,6 +16,7 @@ import com.mo.Utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +32,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     //service层对象
+    //service就是模块的划分
+    //service层使用其他模块功能用service 使用自身功能用dao
     private ProductInfoService productInfoService;
 
     @Autowired
@@ -109,7 +113,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+        return new PageImpl<>(OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent()), pageable, orderMasterPage.getTotalElements());
     }
 
     @Override
