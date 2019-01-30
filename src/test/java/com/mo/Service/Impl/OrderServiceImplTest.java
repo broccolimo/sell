@@ -3,6 +3,7 @@ package com.mo.Service.Impl;
 import com.mo.DTO.OrderDTO;
 import com.mo.Entity.OrderDetail;
 import com.mo.Enum.OrderStatusEnum;
+import com.mo.Enum.PayStatusEnum;
 import com.mo.Service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -76,10 +77,16 @@ public class OrderServiceImplTest {
 
     @Test
     public void finish() {
+        OrderDTO testObj = orderService.findOne(ORDER_ID);
+        OrderDTO res = orderService.finish(testObj);
+        Assert.assertEquals(OrderStatusEnum.FINISH.getCode(), res.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDTO testObj = orderService.findOne(ORDER_ID);
+        OrderDTO res = orderService.paid(testObj);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), res.getPayStatus());
     }
 
     @Test
