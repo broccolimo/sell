@@ -7,6 +7,7 @@ import com.mo.Enum.ResultEnum;
 import com.mo.Exception.SellException;
 import com.mo.Repository.ProductInfoRepository;
 import com.mo.Service.ProductInfoService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import java.util.List;
  * @date 2018/10/19 17:39
  */
 @Service
+@Slf4j
 public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Autowired
@@ -45,11 +47,22 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return repository.save(productInfo);
     }
 
+    //加库存
     @Override
+    @Transactional
     public void increaseStock(List<CartDTO> cartDTOList) {
-
+        for(CartDTO cartDTO : cartDTOList){
+            ProductInfo productInfo = findOne(cartDTO.getProductId());
+            if(productInfo == null){
+                log.error("【增加库存】商品不存在, productId={}", cartDTO.getProductId());
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            productInfo.setProductStock(productInfo.getProductStock() + cartDTO.getProductQuantity());
+            save(productInfo);
+        }
     }
 
+    //减库存
     @Override
     @Transactional
     public void decreaseStock(List<CartDTO> cartDTOList) {

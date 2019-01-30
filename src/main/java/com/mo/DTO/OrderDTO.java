@@ -1,8 +1,6 @@
 package com.mo.DTO;
 
 import com.mo.Entity.OrderDetail;
-import com.mo.Enum.OrderStatusEnum;
-import com.mo.Enum.PayStatusEnum;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -27,4 +25,12 @@ public class OrderDTO {
     private String buyerOpenid;
 
     private List<OrderDetail> orderDetailList;
+
+    private Integer orderStatus;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    private BigDecimal orderAmount;
 }

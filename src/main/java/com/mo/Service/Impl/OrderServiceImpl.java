@@ -6,6 +6,7 @@ import com.mo.DTO.OrderDTO;
 import com.mo.Entity.OrderDetail;
 import com.mo.Entity.OrderMaster;
 import com.mo.Entity.ProductInfo;
+import com.mo.Enum.OrderStatusEnum;
 import com.mo.Enum.ResultEnum;
 import com.mo.Exception.SellException;
 import com.mo.Repository.OrderDetailRepository;
@@ -13,6 +14,7 @@ import com.mo.Repository.OrderMasterRepository;
 import com.mo.Service.OrderService;
 import com.mo.Service.ProductInfoService;
 import com.mo.Utils.KeyUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -117,9 +120,53 @@ public class OrderServiceImpl implements OrderService {
         return new PageImpl<>(OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent()), pageable, orderMasterPage.getTotalElements());
     }
 
+    //取消一个订单
     @Override
+    @Transactional
     public OrderDTO cancel(OrderDTO orderDTO) {
-        return null;
+        //step 1
+        //首先判断订单的状态
+        //如果订单已被完成或者不存在
+        //则不能取消
+        if(!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())){
+            log.error("【取消订单】订单状态不正确, orderId={}, orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+
+        //step 2
+        //修改订单状态
+        orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        OrderMaster orderMaster = new OrderMaster();
+        BeanUtils.copyProperties(orderDTO, orderMaster);
+        OrderMaster res = orderMasterRepository.save(orderMaster);
+        if(res == null){
+            log.error("【取消订单】更新失败, orderMaster={}", orderMaster);
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
+
+        //step 3
+        //返还库存
+        //订单应该是有订单详情的 如果没有 说明不正常
+        //为了健壮性 判断一下
+        if(CollectionUtils.isEmpty(orderDTO.getOrderDetailList())){
+            log.error("【取消订单】订单详情为空, orderDTO={}", orderDTO);
+            throw new SellException(ResultEnum.ORDER_DETAIL_EMPTY);
+        }
+        //调用加库存的方法
+        List<CartDTO> cartDTOList = orderDTO
+                .getOrderDetailList()
+                .stream()
+                .map(e -> new CartDTO(e.getProductId(), e.getProductQuantity()))
+                .collect(Collectors.toList());
+        productInfoService.increaseStock(cartDTOList);
+
+        //step 4
+        //如果已支付需要退款
+        if(orderDTO.getOrderStatus().equals(OrderStatusEnum.FINISH.getCode())){
+            //TODO
+        }
+
+        return orderDTO;
     }
 
     @Override

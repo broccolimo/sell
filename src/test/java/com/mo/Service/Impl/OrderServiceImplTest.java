@@ -2,6 +2,7 @@ package com.mo.Service.Impl;
 
 import com.mo.DTO.OrderDTO;
 import com.mo.Entity.OrderDetail;
+import com.mo.Enum.OrderStatusEnum;
 import com.mo.Service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
@@ -18,8 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
-
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Slf4j
@@ -27,11 +26,11 @@ public class OrderServiceImplTest {
 
     //测试自己首先要声明自己
     @Autowired
-    private OrderServiceImpl orderService;
+    private OrderService orderService;
 
     private final String buyerOpenid = "110";
 
-    private final String orderId = "1543307891625571337";
+    private final String ORDER_ID = "1543307891625571337";
 
     @Test
     public void create() {
@@ -56,9 +55,9 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
-        OrderDTO orderDTO = orderService.findOne(orderId);
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
         log.info("【查询一个订单】 {}", orderDTO);
-        Assert.assertEquals(orderId, orderDTO.getOrderId());
+        Assert.assertEquals(ORDER_ID, orderDTO.getOrderId());
     }
 
     @Test
@@ -70,6 +69,9 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
+        OrderDTO testObj = orderService.findOne(ORDER_ID);
+        OrderDTO res = orderService.cancel(testObj);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), res.getOrderStatus());
     }
 
     @Test
