@@ -6,7 +6,7 @@ import com.mo.Enum.ProductStatusEnum;
 import com.mo.Enum.ResultEnum;
 import com.mo.Exception.SellException;
 import com.mo.Repository.ProductInfoRepository;
-import com.mo.Service.ProductInfoService;
+import com.mo.Service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author 音神
@@ -22,14 +23,22 @@ import java.util.List;
  */
 @Service
 @Slf4j
-public class ProductInfoServiceImpl implements ProductInfoService {
+public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductInfoRepository repository;
 
     @Override
     public ProductInfo findOne(String productId) {
-        return repository.findById(productId).get();
+        //如果数据库中没有productId对应的记录
+        //这里不会返回null 而会报错
+        //return repository.findById(productId).get();
+
+        //至于这个Optional 不要试图用是否为null进行判断
+        //即使它里边没值 它本身也不是null
+        //应该用isPresent()判断里边是否有值
+        Optional<ProductInfo> optinal = repository.findById(productId);
+        return optinal.isPresent() ? optinal.get() : null;
     }
 
     @Override

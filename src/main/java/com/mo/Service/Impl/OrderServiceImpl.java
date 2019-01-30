@@ -13,7 +13,7 @@ import com.mo.Exception.SellException;
 import com.mo.Repository.OrderDetailRepository;
 import com.mo.Repository.OrderMasterRepository;
 import com.mo.Service.OrderService;
-import com.mo.Service.ProductInfoService;
+import com.mo.Service.ProductService;
 import com.mo.Utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
     //service层对象
     //service就是模块的划分
     //service层使用其他模块功能用service 使用自身功能用dao
-    private ProductInfoService productInfoService;
+    private ProductService productInfoService;
 
     @Autowired
     //dao层对象
@@ -48,6 +48,7 @@ public class OrderServiceImpl implements OrderService {
     //dao层对象
     private OrderMasterRepository orderMasterRepository;
 
+    //创建订单
     @Override
     //一旦抛异常就全部回滚
     @Transactional
@@ -85,9 +86,9 @@ public class OrderServiceImpl implements OrderService {
 
         //2. 订单总表入库
         OrderMaster orderMaster = new OrderMaster();
+        orderDTO.setOrderId(orderId);
+        orderDTO.setOrderAmount(orderAmount);
         BeanUtils.copyProperties(orderDTO, orderMaster);
-        orderMaster.setOrderId(orderId);
-        orderMaster.setOrderAmount(orderAmount);
         orderMasterRepository.save(orderMaster);
 
         //3. 扣库存
@@ -115,6 +116,7 @@ public class OrderServiceImpl implements OrderService {
         return orderDTO;
     }
 
+    //获取订单列表
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
         Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);

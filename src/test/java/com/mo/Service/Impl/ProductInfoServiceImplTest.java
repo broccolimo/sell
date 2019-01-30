@@ -19,7 +19,7 @@ import java.util.List;
 public class ProductInfoServiceImplTest {
 
     @Autowired
-    private ProductInfoServiceImpl impl;
+    private ProductServiceImpl impl;
 
     @Test
     public void findOne() {

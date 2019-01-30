@@ -12,7 +12,7 @@ import java.util.List;
  * @since  2018/10/19 16:54
  */
 
-public interface ProductInfoService {
+public interface ProductService {
 
     //查找一个商品
     ProductInfo findOne(String productId);

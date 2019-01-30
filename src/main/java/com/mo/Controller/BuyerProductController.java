@@ -3,7 +3,7 @@ package com.mo.Controller;
 import com.mo.Entity.ProductCategory;
 import com.mo.Entity.ProductInfo;
 import com.mo.Service.ProductCategoryService;
-import com.mo.Service.ProductInfoService;
+import com.mo.Service.ProductService;
 import com.mo.Utils.ResultVOUtil;
 import com.mo.VO.ProductInfoVO;
 import com.mo.VO.ProductVO;
@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.stream.Collectors;
 public class BuyerProductController {
 
     @Autowired
-    private ProductInfoService productInfoService;
+    private ProductService productInfoService;
 
     @Autowired
     private ProductCategoryService productCategoryService;
