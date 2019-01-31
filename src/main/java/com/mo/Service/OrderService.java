@@ -9,8 +9,10 @@ public interface OrderService {
     //创建
     OrderDTO create(OrderDTO orderDTO);
 
+    //根据orderId查询一个订单
     OrderDTO findOne(String orderId);
 
+    //根据openid查询所有订单
     Page<OrderDTO> findList(String buyerOpenid, Pageable pageable);
 
     //取消
@@ -21,7 +23,6 @@ public interface OrderService {
 
     //支付
     OrderDTO paid(OrderDTO orderDTO);
-
 
 
 }

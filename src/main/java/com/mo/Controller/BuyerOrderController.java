@@ -5,6 +5,7 @@ import com.mo.DTO.OrderDTO;
 import com.mo.Enum.ResultEnum;
 import com.mo.Exception.SellException;
 import com.mo.Form.Buyer_Order_Create;
+import com.mo.Service.BuyerService;
 import com.mo.Service.OrderService;
 import com.mo.Utils.ResultVOUtil;
 import com.mo.VO.ResultVO;
@@ -29,6 +30,9 @@ public class BuyerOrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private BuyerService buyerService;
 
     //创建订单
     @PostMapping("/create")
@@ -66,6 +70,8 @@ public class BuyerOrderController {
                                          @RequestParam(value = "page", defaultValue = "0") Integer page,
                                          @RequestParam(value = "size", defaultValue = "10") Integer size) {
         //openid一定不能为空
+        //指的不是没有openid
+        //而是有openid 值是空字符串
         if(StringUtils.isEmpty(openid)){
             log.error("【查询订单列表】openid为空");
             throw new SellException(ResultEnum.PARAM_ERROR);
@@ -81,17 +87,16 @@ public class BuyerOrderController {
     @GetMapping("/detail")
     public ResultVO<OrderDTO> detail(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId){
 
-        //TODO
-        //其实获取数据只用orderId就行
-        //openid要用来做校验 有安全性问题 需要改进 在此先行略过
-
-        if(StringUtils.isEmpty(orderId)){
-            log.error("【查询订单列表】orderId为空");
-            throw new SellException(ResultEnum.PARAM_ERROR);
-        }
-
-        OrderDTO orderDTO = orderService.findOne(orderId);
+        OrderDTO orderDTO = buyerService.findOneOrderWithOpenid(openid, orderId);
         return ResultVOUtil.success(orderDTO);
     }
+
     //取消订单
+    @PostMapping("/cancel")
+    public ResultVO cancel(@RequestParam("openid") String openid,
+                           @RequestParam("orderId") String orderId){
+
+        buyerService.cancelOrderWithOpenid(openid, orderId);
+        return ResultVOUtil.success();
+    }
 }
